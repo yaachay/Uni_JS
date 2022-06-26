@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 4</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Section (A) | Group-6</h1>
+    <fieldset>
+        <legend>
+            <h2>Student Info</h2>
+        </legend>
+        <form onsubmit="onFormSubmit()" autocomplete="on">
+            <label>Student name</label><br>
+            <input type="text" id="name" required><br>
+            <label>Roll No</label><br>
+            <input type="text" id="rno" required><br>
+            <label>Academy Year</label><br>
+            <input type="text" id="year" required><br>
+            <label>Major</label><br>
+            <input type="text" id="major" required><br>
+            <label>Native Town</label><br>
+            <input type="text" id="natown" required><br>
+            <label>Current Address</label><br>
+            <input type="text" id="curaddress" required><br>
+            <label>Edu Mail</label><br>
+            <input type="email" id="edumail" required><br>
+            <label>Phone No</label><br>
+            <input type="tel" id="phno" required><br>
+            <input type="submit" value="Add" onclick="onFormSubmit()">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>
+            <h2>Student Lists</h2>
+        </legend>
+        <table id="studentLists">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Academy Year</th>
+                    <th>Major</th>
+                    <th>Native Town</th>
+                    <th>Current Addr</th>
+                    <th>Edu Mail</th>
+                    <th>Phno</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </fieldset>
+    <script type="text/javascript">
+        var name = document.getElementById("name").value;
+        var rno = document.getElementById("rno").value;
+        var year = document.getElementById("year").value;
+        var major = document.getElementById("major").value;
+        var natown = document.getElementById("natown").value;
+        var curaddress = document.getElementById("curaddress").value;
+        var edumail = document.getElementById("edumail").value;
+        var phno = document.getElementById("phno").value;
+
+        function onFormSubmit() {
+            var formData = readFormData();
+            console.log(formData.name)
+            insertNewRecord(formData);
+        };
+        function Student(name, rno, year, major, natown, curaddress, edumail, phno) {
+            this.name = name;
+            this.rno = rno;
+            this.year = year;
+            this.major = major;
+            this.natown = natown;
+            this.curaddress = curaddress;
+            this.edumail = edumail;
+            this.phno = phno;
+        };
+        function readFormData() {
+            return new Student(name,rno,year,major,natown,curaddress,edumail,phno);
+        };
+        function insertNewRecord(data) {
+            var table = document.getElementById("studentLists").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.length);
+            cell1 = newRow.insertCell(0);
+            cell1.innerHTML = data.name;
+            cell2 = newRow.insertCell(1);
+            cell2.innerHTML = data.rno;
+            cell3 = newRow.insertCell(2);
+            cell3.innerHTML = data.year;
+            cell4 = newRow.insertCell(3);
+            cell4.innerHTML = data.major;
+            cell5 = newRow.insertCell(4);
+            cell5.innerHTML = data.natown;
+            cell6 = newRow.insertCell(5);
+            cell6.innerHTML = data.curaddress;
+            cell7 = newRow.insertCell(6);
+            cell7.innerHTML = data.edumail;
+            cell8 = newRow.insertCell(7);
+            cell8.innerHTML = data.phno;
+            cell9 = newRow.insertCell(8);
+            cell9.innerHTML = `<a>Edit</a>
+                                <a>Delete</a>`;
+        };
+    </script>
+</body>
+
+</html>

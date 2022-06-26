@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DateTime</title>
+</head>
+
+<body>
+    <h1 id="time"></h1>
+    <script type="text/javascript">
+        var time = document.getElementById("time");
+        var now = new Date();
+        var day = now.getDay();
+        var date = now.getDate();
+        var month = now.getMonth();
+        var year = now.getFullYear();
+
+        var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sataday"];
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        time.innerHTML = dayNames[day] + ", " + monthNames[month] + " " + date + ", " + year;
+    </script>
+</body>
+
+</html>

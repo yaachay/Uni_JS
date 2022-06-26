@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2</title>
+
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        h1 {
+            color: antiquewhite;
+            background: darkgreen;
+            text-align: center;
+        }
+
+        #time {
+            color: darkgreen;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Date: Thursday, June 15, 2022 | Time: 08:15:22 PM -->
+    <h1>Time Zone</h1>
+    <div>
+        <img src="assets/images/photo.jpg" alt="Current Time with Photo" width="300" height="300">
+        <p id="time">Time</p>
+    </div>
+
+
+    <script type="text/javascript">
+        var time = document.getElementById("time");
+
+        setInterval(displayTime, 1000);
+        function displayTime() {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            var day = now.getDay();
+            var date = now.getDate();
+            var month = now.getMonth();
+            var year = now.getFullYear();
+            var dName = ["Sunday", "Monday", "Tueaday", "Wednesday", "Thursday", "Saturday"];
+            var dMonth = ["January", "Febauary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            currentdate = dName[day] + "/" + dMonth[month] + "/" + date + "/" + year;
+            var apm = "AM";
+            if (hour === 0) {
+                hour = 12;
+            };
+            if (hour > 12) {
+                apm = "PM";
+                hour = hour - 12;
+            };
+
+            if (hour < 10) { hour = "0" + hour; };
+            if (minute < 10) { minute = "0" + minute; };
+            if (second < 10) { second = "0" + second; };
+            time.innerHTML = "Date: " + dName[day] + ", " + dMonth[month] + " " + date + ", " + year + " | Time: " + hour + ":" + minute + ": " + second + " " + apm;
+        };
+    </script>
+
+</body>
+
+</html>
