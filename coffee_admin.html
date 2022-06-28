@@ -52,7 +52,7 @@
         }
 
         #menuContainer #menuBox {
-            height: 100px;
+            height: 120px;
             width: 200px;
             margin: 5px;
             margin-top: 0;
@@ -60,7 +60,7 @@
         }
 
         #menuContainer #menuBox img {
-            height: 100px;
+            height: 120px;
             width: 200px;
             margin: 5px;
             border-radius: 20px;
@@ -68,7 +68,7 @@
         }
 
         #menuContainer #menuBox span {
-            height: 100px;
+            height: 120px;
             width: 200px;
             margin: 5px;
             border-radius: 20px;
@@ -81,7 +81,7 @@
         #menuContainer #menuBox div {
             position: absolute;
             padding: 20px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
         #menuContainer #menuBox div h2 {
@@ -113,6 +113,7 @@
             padding: 10px;
             border-radius: 5px;
             border-color: #FF00AA;
+            resize: none;
         }
 
         #orderBtn {
@@ -133,17 +134,30 @@
             cursor: pointer;
         }
 
+        #table {
+            position: absolute;
+        }
+
+        #table #matchList {
+            display: none;
+        }
+
         #orderListHeader {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        #orderListHeader div {
+        #orderListHeader #searchBox {
             background-color: #FF00AA;
             border-width: 1.5px;
             border-radius: 20px;
             border-color: #FF00AA;
+            align-content: center;
+        }
+
+        #orderListHeader #refreshBox {
+            display: flex;
             align-content: center;
         }
 
@@ -164,7 +178,8 @@
             border-color: #FF00AA;
         }
 
-        #orderList {
+        #orderList,
+        #matchList {
             border-collapse: collapse;
             margin: 20px;
             font-size: 15px;
@@ -172,33 +187,42 @@
             overflow: hidden;
         }
 
-        #orderList thead {
+        #orderList thead,
+        #matchList thead {
             background-color: #FF00AA;
         }
 
-        #orderList tr {
+        #orderList tr,
+        #matchList tr {
             border-bottom: 1.5px solid #9D9D9D;
         }
 
-        #orderList th {
+        #orderList th,
+        #matchList th {
             padding: 12px;
             color: #FFFFFF;
         }
 
         #orderList th:nth-child(1),
-        #orderList td:nth-child(1) {
+        #orderList td:nth-child(1),
+        #matchList th:nth-child(1),
+        #matchList td:nth-child(1) {
             width: 150px;
             text-align: start;
         }
 
         #orderList th:nth-child(2),
-        #orderList td:nth-child(2) {
+        #orderList td:nth-child(2),
+        #matchList th:nth-child(2),
+        #matchList td:nth-child(2) {
             width: 100px;
             text-align: start;
         }
 
         #orderList th:nth-child(3),
-        #orderList td:nth-child(3) {
+        #orderList td:nth-child(3),
+        #matchList th:nth-child(3),
+        #matchList td:nth-child(3) {
             width: 350px;
             text-align: start;
         }
@@ -212,43 +236,63 @@
         #orderList td:nth-child(5),
         #orderList td:nth-child(6),
         #orderList td:nth-child(7),
-        #orderList td:nth-child(8) {
+        #orderList td:nth-child(8),
+        #matchList th:nth-child(4),
+        #matchList th:nth-child(5),
+        #matchList th:nth-child(6),
+        #matchList th:nth-child(7),
+        #matchList th:nth-child(8),
+        #matchList td:nth-child(4),
+        #matchList td:nth-child(5),
+        #matchList td:nth-child(6),
+        #matchList td:nth-child(7),
+        #matchList td:nth-child(8) {
             width: 70px;
             text-align: center;
         }
 
         #orderList th:nth-child(9),
-        #orderList td:nth-child(9) {
+        #orderList td:nth-child(9),
+        #matchList th:nth-child(9),
+        #matchList td:nth-child(9) {
             width: 150px;
             text-align: end;
         }
 
         #orderList th:nth-child(10),
-        #orderList td:nth-child(10) {
+        #orderList td:nth-child(10),
+        #matchList th:nth-child(10),
+        #matchList td:nth-child(10) {
             width: 150px;
             display: flex;
             justify-content: center;
         }
-        #orderList td:nth-child(10) button{
+
+        #orderList td:nth-child(10) button {
             border: 0;
             margin: 2px;
             background-color: transparent;
             text-decoration: underline;
             cursor: pointer;
         }
-        #orderList td:nth-child(10) button:hover{
+
+        #orderList td:nth-child(10) button:hover {
             color: #00ff;
             text-decoration: underline blue;
         }
-        #orderList td {
+
+        #orderList td,
+        #matchList td {
             padding: 12px;
         }
 
-        #orderList tr:nth-of-type(odd) {
+        #orderList tr:nth-of-type(odd),
+        #matchList tr:nth-of-type(odd) {
             background-color: rgba(255, 0, 170, 0.3);
         }
 
-        #orderList tr:nth-of-type(even) {
+        #orderList tr:nth-of-type(even),
+        #matchList tr:nth-of-type(even) {
             background-color: rgba(255, 0, 170, 0.1);
         }
 
@@ -366,10 +410,14 @@
     <span id="divider"></span>
     <div id="container">
         <div id="orderListHeader">
-            <h3>Order List</h3>
-            <div><input type="text" id="search" placeholder="Search"><button onclick="searchRecord();">🔍</button></div>
+            <div id="refreshBox">
+                <h3>Order List</h3>
+                <button id="refreshBtn" onclick="refreshRecord()">🚀</button>
+            </div>
+            <div id="searchBox"><input type="text" id="search" placeholder="Search"><button
+                    onclick="searchRecord();">🔍</button></div>
         </div>
-        <div>
+        <div id="table">
             <table id="orderList">
                 <thead>
                     <tr>
@@ -383,6 +431,24 @@
                         <th>A Qty:</th>
                         <th>Total Cost</th>
                         <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <table id="matchList">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>PhoneNo</th>
+                        <th>Address</th>
+                        <th>M Qty:</th>
+                        <th>E Qty:</th>
+                        <th>L Qty:</th>
+                        <th>C Qty:</th>
+                        <th>A Qty:</th>
+                        <th>Total Cost</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -433,6 +499,7 @@
                     updateRecord(formDate);
                     clearForm();
                 }
+                refreshRecord();
             } else {
                 alert("Invalid Order Form!");
             }
@@ -513,7 +580,30 @@
             return matchCustomer;
         }
         function showSearchResult(data) {
-
+            document.getElementById("orderList").style.display = "none";
+            for (var i = 0; i < data.length; i++) {
+                var tbody = document.getElementById("matchList").getElementsByTagName("tbody")[0];
+                var newRow = tbody.insertRow(tbody.length);
+                cell1 = newRow.insertCell(0);
+                cell1.innerHTML = data[i].customerName;
+                cell2 = newRow.insertCell(1);
+                cell2.innerHTML = data[i].phoneNo;
+                cell3 = newRow.insertCell(2);
+                cell3.innerHTML = data[i].address;
+                cell4 = newRow.insertCell(3);
+                cell4.innerHTML = data[i].mQty;
+                cell5 = newRow.insertCell(4);
+                cell5.innerHTML = data[i].eQty;
+                cell6 = newRow.insertCell(5);
+                cell6.innerHTML = data[i].lQty;
+                cell7 = newRow.insertCell(6);
+                cell7.innerHTML = data[i].cQty;
+                cell8 = newRow.insertCell(7);
+                cell8.innerHTML = data[i].aQty;
+                cell9 = newRow.insertCell(8);
+                cell9.innerHTML = data[i].totalCost;
+            }
+            document.getElementById("matchList").style.display = "block";
         }
         function onEdit(cell) {
             selectedRow = cell.parentElement.parentElement;
@@ -542,9 +632,14 @@
         function deleteRecord(td) {
             var row = td.parentElement.parentElement;
             if (confirm("Are you sure to delete this record?")) {
-                document.getElementById("orderList").deleteRow(row.rowIndex);
                 customerArray.splice((row.rowIndex - 1), 1);
+                document.getElementById("orderList").deleteRow(row.rowIndex);
             }
+        }
+        function refreshRecord(){
+            document.getElementById("orderList").style.display = "block";
+            document.getElementById("matchList").style.display = "none";
+            search.value = "";
         }
         function clearForm() {
             customerName.value = "";
