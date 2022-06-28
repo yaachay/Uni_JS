@@ -109,10 +109,9 @@
             width: 400px;
             font-size: 15px;
             font-family: DefaultFont;
-            border-width: 1.5px;
             padding: 10px;
+            border: 1.5px solid #FF00AA;
             border-radius: 5px;
-            border-color: #FF00AA;
             resize: none;
         }
 
@@ -150,9 +149,8 @@
 
         #orderListHeader #searchBox {
             background-color: #FF00AA;
-            border-width: 1.5px;
+            border: 1.5px solid #FF00AA;
             border-radius: 20px;
-            border-color: #FF00AA;
             align-content: center;
         }
 
@@ -173,9 +171,8 @@
             font-family: DefaultFont;
             font-size: 15px;
             padding: 10px 17px;
-            border-width: 1.5px;
+            border: 1.5px solid #FF00AA;
             border-radius: 20px;
-            border-color: #FF00AA;
         }
 
         #orderList,
@@ -414,8 +411,8 @@
                 <h3>Order List</h3>
                 <button id="refreshBtn" onclick="refreshRecord()">🚀</button>
             </div>
-            <div id="searchBox"><input type="text" id="search" placeholder="Search"><button
-                    onclick="searchRecord();">🔍</button></div>
+            <form id="searchBox" onsubmit="event.preventDefault();searchRecord();"><input type="text" id="search"
+                    placeholder="Search" required><button>🔍</button></form>
         </div>
         <div id="table">
             <table id="orderList">
@@ -563,8 +560,8 @@
         }
         function searchRecord() {
             var matchData = matchRecord();
+            document.getElementById("matchList").getElementsByTagName("tbody")[0].innerHTML = "";
             showSearchResult(matchData);
-            console.log(matchData);
         }
         function matchRecord() {
             var searchQuery = search.value.toLowerCase();
@@ -604,6 +601,7 @@
                 cell9.innerHTML = data[i].totalCost;
             }
             document.getElementById("matchList").style.display = "block";
+            matchCustomer = [];
         }
         function onEdit(cell) {
             selectedRow = cell.parentElement.parentElement;
@@ -636,10 +634,11 @@
                 document.getElementById("orderList").deleteRow(row.rowIndex);
             }
         }
-        function refreshRecord(){
+        function refreshRecord() {
             document.getElementById("orderList").style.display = "block";
             document.getElementById("matchList").style.display = "none";
             search.value = "";
+            matchCustomer = [];
         }
         function clearForm() {
             customerName.value = "";
