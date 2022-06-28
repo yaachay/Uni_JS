@@ -17,9 +17,9 @@
         <legend>
             <h2>Student Info</h2>
         </legend>
-        <form onsubmit="onFormSubmit()" autocomplete="on">
+        <form onsubmit="event.preventDefault();onFormSubmit();">
             <label>Student name</label><br>
-            <input type="text" id="name" required><br>
+            <input type="text" id="stdname" required><br>
             <label>Roll No</label><br>
             <input type="text" id="rno" required><br>
             <label>Academy Year</label><br>
@@ -34,7 +34,7 @@
             <input type="email" id="edumail" required><br>
             <label>Phone No</label><br>
             <input type="tel" id="phno" required><br>
-            <input type="submit" value="Add" onclick="onFormSubmit()">
+            <input type="submit" value="Add">
         </form>
     </fieldset>
     <fieldset>
@@ -60,20 +60,17 @@
         </table>
     </fieldset>
     <script type="text/javascript">
-        var name = document.getElementById("name").value;
-        var rno = document.getElementById("rno").value;
-        var year = document.getElementById("year").value;
-        var major = document.getElementById("major").value;
-        var natown = document.getElementById("natown").value;
-        var curaddress = document.getElementById("curaddress").value;
-        var edumail = document.getElementById("edumail").value;
-        var phno = document.getElementById("phno").value;
+        var stdname = document.getElementById("stdname");
+        var rno = document.getElementById("rno");
+        var year = document.getElementById("year");
+        var major = document.getElementById("major");
+        var natown = document.getElementById("natown");
+        var curaddress = document.getElementById("curaddress");
+        var edumail = document.getElementById("edumail");
+        var phno = document.getElementById("phno");
+        var studentArray = [];
 
-        function onFormSubmit() {
-            var formData = readFormData();
-            console.log(formData.name)
-            insertNewRecord(formData);
-        };
+
         function Student(name, rno, year, major, natown, curaddress, edumail, phno) {
             this.name = name;
             this.rno = rno;
@@ -84,32 +81,52 @@
             this.edumail = edumail;
             this.phno = phno;
         };
-        function readFormData() {
-            return new Student(name,rno,year,major,natown,curaddress,edumail,phno);
+
+        function onFormSubmit() {
+            var formData = readFormData();
+            console.log(formData);
+            insertNewRecord(formData);
+            clearForm();
         };
+
+        function readFormData() {
+            studentArray.push(new Student(stdname.value, rno.value, year.value, major.value, natown.value, curaddress.value, edumail.value, phno.value));
+            return studentArray;
+        };
+
         function insertNewRecord(data) {
             var table = document.getElementById("studentLists").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.length);
             cell1 = newRow.insertCell(0);
-            cell1.innerHTML = data.name;
+            cell1.innerHTML = data[data.length - 1].name;
             cell2 = newRow.insertCell(1);
-            cell2.innerHTML = data.rno;
+            cell2.innerHTML = data[data.length - 1].rno;
             cell3 = newRow.insertCell(2);
-            cell3.innerHTML = data.year;
+            cell3.innerHTML = data[data.length - 1].year;
             cell4 = newRow.insertCell(3);
-            cell4.innerHTML = data.major;
+            cell4.innerHTML = data[data.length - 1].major;
             cell5 = newRow.insertCell(4);
-            cell5.innerHTML = data.natown;
+            cell5.innerHTML = data[data.length - 1].natown;
             cell6 = newRow.insertCell(5);
-            cell6.innerHTML = data.curaddress;
+            cell6.innerHTML = data[data.length - 1].curaddress;
             cell7 = newRow.insertCell(6);
-            cell7.innerHTML = data.edumail;
+            cell7.innerHTML = data[data.length - 1].edumail;
             cell8 = newRow.insertCell(7);
-            cell8.innerHTML = data.phno;
+            cell8.innerHTML = data[data.length - 1].phno;
             cell9 = newRow.insertCell(8);
-            cell9.innerHTML = `<a>Edit</a>
-                                <a>Delete</a>`;
+            cell9.innerHTML = `<a>Edit</a><a>Delete</a>`;
         };
+        function clearForm() {
+            stdname.value = "";
+            rno.value = "";
+            year.value = "";
+            major.value = "";
+            natown.value = "";
+            curaddress.value = "";
+            edumail.value = "";
+            phno.value = "";
+        }
+
     </script>
 </body>
 

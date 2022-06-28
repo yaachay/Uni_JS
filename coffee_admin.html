@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Admin</title>
+    <style>
+        @font-face {
+            font-family: DefaultFont;
+            src: url("assets/fonts/JosefinSans-Regular.ttf");
+        }
+
+        body {
+            font-family: DefaultFont;
+        }
+
+        h1 {
+            color: #FF00AA;
+            text-align: center;
+        }
+
+        h3 {
+            color: #FF00AA;
+        }
+
+        #container {
+            justify-content: center;
+        }
+
+        #menuHeader,
+        #orderFormHeader,
+        #orderListHeader {
+            padding: 0% 15%;
+        }
+
+        #menuContainer,
+        #orderForm,
+        #orderList {
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        #menuContainer,
+        #orderForm {
+            display: flex;
+        }
+
+        #orderList {
+            justify-content: center;
+        }
+
+        #menuContainer #menuBox {
+            height: 100px;
+            width: 200px;
+            margin: 5px;
+            margin-top: 0;
+            border-radius: 20px;
+        }
+
+        #menuContainer #menuBox img {
+            height: 100px;
+            width: 200px;
+            margin: 5px;
+            border-radius: 20px;
+            position: absolute;
+        }
+
+        #menuContainer #menuBox span {
+            height: 100px;
+            width: 200px;
+            margin: 5px;
+            border-radius: 20px;
+            background: linear-gradient(transparent, #000000 70%);
+            opacity: 80%;
+            display: inline-block;
+            position: absolute;
+        }
+
+        #menuContainer #menuBox div {
+            position: absolute;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        #menuContainer #menuBox div h2 {
+            margin: 0px;
+            color: #FFFFFF;
+        }
+
+        #menuContainer #menuBox div h5 {
+            margin: 0;
+            color: #9D9D9D;
+        }
+
+        #leftForm div,
+        #rightForm div {
+            margin: 15px;
+            margin-top: 0;
+        }
+
+        #orderForm label {
+            color: #9D9D9D;
+        }
+
+        #orderForm input,
+        #orderForm textarea {
+            width: 400px;
+            font-size: 15px;
+            font-family: DefaultFont;
+            border-width: 1.5px;
+            padding: 10px;
+            border-radius: 5px;
+            border-color: #FF00AA;
+        }
+
+        #orderBtn {
+            padding: 10px 185px;
+            margin: 0px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: #FF00AA;
+            border-radius: 5px;
+            background-color: transparent;
+            border-color: #FF00AA;
+        }
+
+        #orderBtn:hover {
+            background-color: #FF00AA;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        #orderListHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #orderListHeader div {
+            background-color: #FF00AA;
+            border-width: 1.5px;
+            border-radius: 20px;
+            border-color: #FF00AA;
+            align-content: center;
+        }
+
+        #orderListHeader button {
+            font-size: 18px;
+            text-align: center;
+            border: 0;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        #orderListHeader input {
+            font-family: DefaultFont;
+            font-size: 15px;
+            padding: 10px 17px;
+            border-width: 1.5px;
+            border-radius: 20px;
+            border-color: #FF00AA;
+        }
+
+        #orderList {
+            border-collapse: collapse;
+            margin: 20px;
+            font-size: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #orderList thead {
+            background-color: #FF00AA;
+        }
+
+        #orderList tr {
+            border-bottom: 1.5px solid #9D9D9D;
+        }
+
+        #orderList th {
+            padding: 12px;
+            color: #FFFFFF;
+        }
+
+        #orderList th:nth-child(1),
+        #orderList td:nth-child(1) {
+            width: 150px;
+            text-align: start;
+        }
+
+        #orderList th:nth-child(2),
+        #orderList td:nth-child(2) {
+            width: 100px;
+            text-align: start;
+        }
+
+        #orderList th:nth-child(3),
+        #orderList td:nth-child(3) {
+            width: 350px;
+            text-align: start;
+        }
+
+        #orderList th:nth-child(4),
+        #orderList th:nth-child(5),
+        #orderList th:nth-child(6),
+        #orderList th:nth-child(7),
+        #orderList th:nth-child(8),
+        #orderList td:nth-child(4),
+        #orderList td:nth-child(5),
+        #orderList td:nth-child(6),
+        #orderList td:nth-child(7),
+        #orderList td:nth-child(8) {
+            width: 70px;
+            text-align: center;
+        }
+
+        #orderList th:nth-child(9),
+        #orderList td:nth-child(9) {
+            width: 150px;
+            text-align: end;
+        }
+
+        #orderList th:nth-child(10),
+        #orderList td:nth-child(10) {
+            width: 150px;
+            display: flex;
+            justify-content: center;
+        }
+        #orderList td:nth-child(10) button{
+            border: 0;
+            margin: 2px;
+            background-color: transparent;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #orderList td:nth-child(10) button:hover{
+            color: #00ff;
+            text-decoration: underline blue;
+        }
+        #orderList td {
+            padding: 12px;
+        }
+
+        #orderList tr:nth-of-type(odd) {
+            background-color: rgba(255, 0, 170, 0.3);
+        }
+
+        #orderList tr:nth-of-type(even) {
+            background-color: rgba(255, 0, 170, 0.1);
+        }
+
+
+        #divider {
+            height: 3px;
+            width: 200px;
+            margin-left: calc(50% - 100px);
+            margin-top: 20px;
+            background-color: #FF00AA;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Section A | Group 7</h1>
+    <div id="container">
+        <div id="menuHeader">
+            <h3>Available Items</h3>
+        </div>
+        <div id="menuContainer">
+            <div id="menuBox">
+                <img src="assets/images/mocha.jpg">
+                <span></span>
+                <div>
+                    <h2>Mocha</h2>
+                    <h5>Price: 2500MMK</h5>
+                </div>
+            </div>
+            <div id="menuBox">
+                <img src="assets/images/espresso.jpg">
+                <span></span>
+                <div>
+                    <h2>Espresso</h2>
+                    <h5>Price: 1800MMK</h5>
+                </div>
+            </div>
+            <div id="menuBox">
+                <img src="assets/images/latte.jpg">
+                <span></span>
+                <div>
+                    <h2>Latte</h2>
+                    <h5>Price: 2000MMK</h5>
+                </div>
+            </div>
+            <div id="menuBox">
+                <img src="assets/images/capccino.jpg">
+                <span></span>
+                <div>
+                    <h2>Cappuccino</h2>
+                    <h5>Price: 2000MMK</h5>
+                </div>
+            </div>
+            <div id="menuBox">
+                <img src="assets/images/americano.jpg">
+                <span></span>
+                <div>
+                    <h2>Americano</h2>
+                    <h5>Price: 2500MMK</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <span id="divider"></span>
+    <div id="container">
+        <div id="orderFormHeader">
+            <h3>Order Form</h3>
+        </div>
+        <form onsubmit="event.preventDefault();onFormSubmit();" id="orderForm">
+            <div id="leftForm">
+                <div>
+                    <label>Customer Name:</label><br>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div>
+                    <label>Phone Number:</label><br>
+                    <input type="text" id="phoneNo" required>
+                </div>
+                <div>
+                    <label>Address:</label><br>
+                    <textarea id="address" rows="5" required></textarea>
+                </div><br>
+                <button id="orderBtn">ORDER</button>
+            </div>
+            <div id="rightForm">
+                <div>
+                    <label>Mocha Qty:</label><br>
+                    <input type="number" min="0" value="0" id="mQty">
+                </div>
+                <div>
+                    <label>Espresso Qty:</label><br>
+                    <input type="number" min="0" value="0" id="eQty">
+                </div>
+                <div>
+                    <label>Latte Qty:</label><br>
+                    <input type="number" min="0" value="0" id="lQty">
+                </div>
+                <div>
+                    <label>Cappuccino Qty:</label><br>
+                    <input type="number" min="0" value="0" id="cQty">
+                </div>
+                <div>
+                    <label>Americano Qty:</label><br>
+                    <input type="number" min="0" value="0" id="aQty">
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+    <span id="divider"></span>
+    <div id="container">
+        <div id="orderListHeader">
+            <h3>Order List</h3>
+            <div><input type="text" id="search" placeholder="Search"><button onclick="searchRecord();">🔍</button></div>
+        </div>
+        <div>
+            <table id="orderList">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>PhoneNo</th>
+                        <th>Address</th>
+                        <th>M Qty:</th>
+                        <th>E Qty:</th>
+                        <th>L Qty:</th>
+                        <th>C Qty:</th>
+                        <th>A Qty:</th>
+                        <th>Total Cost</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var mPrice = 2500;
+        var ePrice = 1800;
+        var lPrice = 2000;
+        var cPrice = 2000;
+        var aPrice = 2500;
+        var customerName = document.getElementById("customerName");
+        var phoneNo = document.getElementById("phoneNo");
+        var address = document.getElementById("address");
+        var mQty = document.getElementById("mQty");
+        var eQty = document.getElementById("eQty");
+        var lQty = document.getElementById("lQty");
+        var cQty = document.getElementById("cQty");
+        var aQty = document.getElementById("aQty");
+        var orderBtn = document.getElementById("orderBtn");
+        var search = document.getElementById("search");
+        var customerArray = [];
+        var matchCustomer = [];
+        var selectedRow = null;
+        var rowIndex = 0;
+
+        function Customer(customerName, phoneNo, address, mQty, eQty, lQty, cQty, aQty, totalCost) {
+            this.customerName = customerName;
+            this.phoneNo = phoneNo;
+            this.address = address;
+            this.mQty = mQty;
+            this.eQty = eQty;
+            this.lQty = lQty;
+            this.cQty = cQty;
+            this.aQty = aQty;
+            this.totalCost = totalCost;
+        }
+        function onFormSubmit() {
+            if (checkForm()) {
+                var formDate = fetchFormData();
+                if (selectedRow == null) {
+                    insertNewRecord(formDate);
+                    clearForm();
+                } else {
+                    updateRecord(formDate);
+                    clearForm();
+                }
+            } else {
+                alert("Invalid Order Form!");
+            }
+        }
+        function checkForm() {
+            var isValid = false;
+            if (mQty.value == 0 && eQty.value == 0 && lQty.value == 0 && cQty.value == 0 && aQty.value == 0) {
+                isValid = false;
+            } else {
+                isValid = true;
+            }
+            return isValid;
+        }
+        function fetchFormData() {
+            var totalCost = 0;
+            if (mQty.value != 0) {
+                totalCost += (parseInt(mQty.value) * mPrice);
+            }
+            if (eQty.value != 0) {
+                totalCost += (parseInt(eQty.value) * ePrice);
+            }
+            if (lQty.value != 0) {
+                totalCost += (parseInt(lQty.value) * lPrice);
+            }
+            if (cQty.value != 0) {
+                totalCost += (parseInt(cQty.value) * cPrice);
+            }
+            if (aQty.value != 0) {
+                totalCost += (parseInt(aQty.value) * aPrice);
+            }
+            if (selectedRow == null) {
+                customerArray.push(new Customer(customerName.value, phoneNo.value, address.value, mQty.value, eQty.value, lQty.value, cQty.value, aQty.value, totalCost));
+            } else {
+                customerArray[rowIndex - 1] = (new Customer(customerName.value, phoneNo.value, address.value, mQty.value, eQty.value, lQty.value, cQty.value, aQty.value, totalCost));
+            }
+            return customerArray;
+        }
+        function insertNewRecord(data) {
+            var tbody = document.getElementById("orderList").getElementsByTagName("tbody")[0];
+            var newRow = tbody.insertRow(tbody.length);
+            cell1 = newRow.insertCell(0);
+            cell1.innerHTML = data[data.length - 1].customerName;
+            cell2 = newRow.insertCell(1);
+            cell2.innerHTML = data[data.length - 1].phoneNo;
+            cell3 = newRow.insertCell(2);
+            cell3.innerHTML = data[data.length - 1].address;
+            cell4 = newRow.insertCell(3);
+            cell4.innerHTML = data[data.length - 1].mQty;
+            cell5 = newRow.insertCell(4);
+            cell5.innerHTML = data[data.length - 1].eQty;
+            cell6 = newRow.insertCell(5);
+            cell6.innerHTML = data[data.length - 1].lQty;
+            cell7 = newRow.insertCell(6);
+            cell7.innerHTML = data[data.length - 1].cQty;
+            cell8 = newRow.insertCell(7);
+            cell8.innerHTML = data[data.length - 1].aQty;
+            cell9 = newRow.insertCell(8);
+            cell9.innerHTML = data[data.length - 1].totalCost;
+            cell10 = newRow.insertCell(9);
+            cell10.innerHTML = "<button onclick=\"onEdit(this)\">Edit</button><button onclick=\"deleteRecord(this)\">Delete</button>";
+        }
+        function searchRecord() {
+            var matchData = matchRecord();
+            showSearchResult(matchData);
+            console.log(matchData);
+        }
+        function matchRecord() {
+            var searchQuery = search.value.toLowerCase();
+            for (var i = 0; i < customerArray.length; i++) {
+                var customerName = customerArray[i].customerName.toLowerCase();
+                if (searchQuery == customerName) {
+                    matchCustomer.push(customerArray[i]);
+                }
+                else {
+                    console.log("Failed");
+                }
+            }
+            return matchCustomer;
+        }
+        function showSearchResult(data) {
+
+        }
+        function onEdit(cell) {
+            selectedRow = cell.parentElement.parentElement;
+            rowIndex = selectedRow.rowIndex;
+            customerName.value = selectedRow.cells[0].innerHTML;
+            phoneNo.value = selectedRow.cells[1].innerHTML;
+            address.value = selectedRow.cells[2].innerHTML;
+            mQty.value = selectedRow.cells[3].innerHTML;
+            eQty.value = selectedRow.cells[4].innerHTML;
+            lQty.value = selectedRow.cells[5].innerHTML;
+            cQty.value = selectedRow.cells[6].innerHTML;
+            aQty.value = selectedRow.cells[7].innerHTML;
+            orderBtn.innerHTML = "UPDATE";
+        }
+        function updateRecord(data) {
+            selectedRow.cells[0].innerHTML = data[rowIndex - 1].customerName;
+            selectedRow.cells[1].innerHTML = data[rowIndex - 1].phoneNo;
+            selectedRow.cells[2].innerHTML = data[rowIndex - 1].address;
+            selectedRow.cells[3].innerHTML = data[rowIndex - 1].mQty;
+            selectedRow.cells[4].innerHTML = data[rowIndex - 1].eQty;
+            selectedRow.cells[5].innerHTML = data[rowIndex - 1].lQty;
+            selectedRow.cells[6].innerHTML = data[rowIndex - 1].cQty;
+            selectedRow.cells[7].innerHTML = data[rowIndex - 1].aQty;
+            selectedRow.cells[8].innerHTML = data[rowIndex - 1].totalCost;
+        }
+        function deleteRecord(td) {
+            var row = td.parentElement.parentElement;
+            if (confirm("Are you sure to delete this record?")) {
+                document.getElementById("orderList").deleteRow(row.rowIndex);
+                customerArray.splice((row.rowIndex - 1), 1);
+            }
+        }
+        function clearForm() {
+            customerName.value = "";
+            phoneNo.value = "";
+            address.value = "";
+            mQty.value = 0;
+            eQty.value = 0;
+            lQty.value = 0;
+            cQty.value = 0;
+            aQty.value = 0;
+            orderBtn.innerHTML = "ORDER";
+            selectedRow = null;
+            rowIndex = 0;
+        }
+
+    </script>
+
+</body>
+
+</html>
