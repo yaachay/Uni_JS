@@ -124,7 +124,7 @@
             color: #FF00AA;
             border-radius: 5px;
             background-color: transparent;
-            border-color: #FF00AA;
+            border: 1.5px solid #FF00AA;
         }
 
         #orderBtn:hover {
@@ -361,7 +361,7 @@
         <div id="orderFormHeader">
             <h3>Order Form</h3>
         </div>
-        <form onsubmit="event.preventDefault();onFormSubmit();" id="orderForm">
+        <form onsubmit="event.preventDefault();onFormSubmit();" id="orderForm" autocomplete="off">
             <div id="leftForm">
                 <div>
                     <label>Customer Name:</label><br>
@@ -411,8 +411,8 @@
                 <h3>Order List</h3>
                 <button id="refreshBtn" onclick="refreshRecord()">🚀</button>
             </div>
-            <form id="searchBox" onsubmit="event.preventDefault();searchRecord();"><input type="text" id="search"
-                    placeholder="Search" required><button>🔍</button></form>
+            <form id="searchBox" onsubmit="event.preventDefault();searchRecord();" autocomplete="off"><input type="text"
+                    id="search" placeholder="Search" required><button>🔍</button></form>
         </div>
         <div id="table">
             <table id="orderList">
