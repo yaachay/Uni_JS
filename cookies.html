@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies</title>
+</head>
+
+<body>
+    <h1>Cookies</h1>
+    <button onclick="changeColor();">Change Mode</button>
+    <script type="text/javascript">
+        function changeColor() {
+            if (!getCookies("changeColor")) {
+                setCookies("changeColor", true, 30);
+                document.querySelector("h1").style.color = "#ff0000";
+            } else {
+                document.cookie = ("changeColor=; expires=Sat, 27 Oct 2001 00:00:00 UTC; path=/;");
+                document.querySelector("h1").style.color = "#000000";
+            }
+        }
+
+        function setCookies(cName, cValue, expDays) {
+            var date = new Date();
+            date.setTime(date.getTime() + (expDays * 24 * 60 * 60));
+            document.cookie = cName + "=" + cValue + "; expires=" + date.toUTCString() + "; path=/";
+        }
+        function getCookies(cName) {
+            var name = cName + "="; //changeColor=true; exprires=; path=/;
+            var decode = decodeURIComponent(document.cookie);
+            var cArr = decode.split("; ");
+            var result;
+            cArr.forEach(val => {
+                if (val.indexOf(name) === 0) {
+                    result = val.substring(name.length);
+                }
+            })
+            console.log("getCookies");
+            console.log(result)
+            return result;
+        }
+        function setColor() {
+            if (getCookies("changeColor")) {
+                document.querySelector("h1").style.color = "#ff0000";
+                console.log("changedColor");
+            } else {
+                document.querySelector("h1").style.color = "#000000";
+                console.log("normalColor");
+            }
+        }
+        window.addEventListener("load", setColor());
+    </script>
+</body>
+
+</html>
