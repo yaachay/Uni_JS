@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local Storage</title>
+</head>
+
+<body onload="setData();">
+    <form action="">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>
+            <tr>
+                <td>Major</td>
+                <td><input type="text" name="major" id="major"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Save Data" onsubmit="saveData();"></td>
+            </tr>
+        </table>
+    </form>
+    <h2>Local Storage</h2>
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td name="dName"></td>
+        </tr>
+        <tr>
+            <td>Major: </td>
+            <td name="dMajor"></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+
+        function saveData() {
+            console.log("hello");
+            var name = document.getElementById("name");
+            var major = document.getElementById("major");
+            var dName = document.dName;
+            var dMajor = document.dMajor;
+            localStorage.setItem("name", name.value);
+            localStorage.setItem("major", dMajor.value);
+            dName.innerHTML = localStorage.getItem("name");
+            
+            dMajor.innerHTML = localStorage.getItem("major");
+        }
+        function setData(){
+
+        }
+    </script>
+</body>
+
+</html>

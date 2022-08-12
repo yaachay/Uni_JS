@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap Options</title>
+    <style>
+        select {
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="" id="" size="5">
+                            <option value="Ann">Ann</option>
+                            <option value="Sittway">Sittway</option>
+                            <option value="KyaukPhyu">KyaukPhyu</option>
+                            <option value="MyaukOo">MyaukOo</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="button" value=">>"><br>
+                        <input type="button" value="<<">
+                    </td>
+                    <td><select name="" id="" size="5"></select></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <script type="text/javascript">
+        var s1 = document.forms[0].elements[0];
+        var b1 = document.forms[0].elements[1];
+        var b2 = document.forms[0].elements[2];
+        var s2 = document.forms[0].elements[3];
+
+        b1.onclick = function () {
+            var x = s1.selectedIndex;
+            var op = s1.options[x];
+            s2.appendChild(op);
+        };
+        b2.onclick = function () {
+            var x = s2.selectedIndex;
+            var op = s2.options[x];
+            s1.appendChild(op);
+        };
+    </script>
+</body>
+
+</html>
