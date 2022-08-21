@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Time Comparesion</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="datetime-local" id="g3">
+        <input type="button" value="console" onclick="log();">
+        <p id="date"></p>
+    </form>
+    <script type="text/javascript">
+        var g3 = document.getElementById("g3");
+        var date = document.getElementById("date");
+        var g1 = new Date(2019, 08, 03, 11, 45);
+
+        // (YYYY, MM, DD, Hr, Min, Sec)
+        var g2 = new Date(
+            '08 / 21 / 2022 02: 11 AM'
+        );
+        // console.log(g1 + " " + g2);
+        if (g1.getTime() < g2.getTime())
+            document.write("g1 is lesser than g2");
+        else if (g1.getTime() > g2.getTime())
+            document.write("g1 is greater than g2");
+        else
+            document.write("both are equal");
+
+        function log(){
+            date.innerHTML = g3.value;
+        }
+    </script>
+</body>
+
+</html>
